@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PclSample.Core.ViewModels;
 
 namespace PclSample.WPF
 {
@@ -23,6 +24,11 @@ namespace PclSample.WPF
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            await ((MainViewModel)DataContext).InitAsync();
         }
     }
 }

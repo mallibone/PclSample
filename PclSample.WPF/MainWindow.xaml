@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PclSample.WPF"
         mc:Ignorable="d"
+        Loaded="MainWindow_OnLoaded"
+        DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+    <ListView ItemsSource="{Binding People}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding FullName}"></TextBlock>
+            </DataTemplate>
+        </ListView.ItemTemplate>
         
-    </Grid>
+    </ListView>
 </Window>

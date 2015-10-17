@@ -116,6 +116,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PclSample.Core\PclSample.Core.csproj">
+      <Project>{ACBC3FE1-18E5-4523-880E-F91EC86A5739}</Project>
+      <Name>PclSample.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -5,26 +5,43 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using GalaSoft.MvvmLight.Helpers;
+using PclSample.Core.Models;
+using PclSample.Core.ViewModels;
+
+//using PclSample.Core.Models;
+//using PclSample.Core.ViewModels;
 
 namespace PclSample.Droid
 {
     [Activity(Label = "PclSample.Droid", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : Activity
+    internal class MainActivity : Activity
     {
-        int count = 1;
-
-        protected override void OnCreate(Bundle bundle)
+        protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
+            await Vm.InitAsync();
+
             // Get our button from the layout resource,
             // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.MyButton);
+            PeopleListView.Adapter = Vm.People.GetAdapter(GetPersonView);
+        }
 
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+        public ListView PeopleListView => FindViewById<ListView>(Resource.Id.PeopleListView);
+
+        private MainViewModel Vm => Locator.Instance.MainViewModel;
+
+        private View GetPersonView(int position, Person person, View convertView)
+        {
+            View view = convertView ?? LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, null);
+
+            view.FindViewById<TextView>(Android.Resource.Id.Text1).Text = person.FullName;
+
+            return view;
         }
     }
 }
